@@ -36,7 +36,25 @@ let app = {
 
         return list;
     },
-    binarySearch: function (key, list) {
+    binarySearch: function (key, list, low, high) {
+        let middle = parseInt((low + high) / 2);
+
+        if(list[middle] === key) {
+            return middle;
+        }
+
+        if(low > high) {
+            return -1;    
+        }
+        
+        if(list[middle] > key) {
+            return app.binarySearch(key, list, 0, middle - 1);
+        }
+        
+        if(list[middle] < key) {
+            return app.binarySearch(key, list, middle, high - 1);
+        }
+
         return -1;
     }
 }
