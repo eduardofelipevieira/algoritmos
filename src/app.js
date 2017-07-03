@@ -48,8 +48,6 @@ let app = {
         sort(list, middle + 1, high);
         merge(list, low, middle, high);
 
-        console.log(JSON.stringify(list));
-
         return list;
 
         function sort(list, low, high) {
@@ -72,27 +70,21 @@ let app = {
             let i = low, j = middle + 1, k = low;
 
             while (i <= middle && j <= high) {
-                if (aux[i] < aux[j]) {
-                    list[k] = list[i];
+                if (aux[i] <= aux[j]) {
+                    list[k] = aux[i];
                     i++;
                 } else {
-                    list[k] = list[j];
+                    list[k] = aux[j];
                     j++;
                 }
                 k++;
             }
 
             while (i <= middle) {
-                list[k] = list[i];
+                list[k] = aux[i];
                 i++;
                 k++;
             }
-
-            // while (j <= high) {
-            //     list[k] = list[j];
-            //     j++;
-            //     k++;
-            // }
         }
     },
     binarySearch: function (key, list) {
