@@ -1,0 +1,14 @@
+{
+  "name": "algoritmos",
+  "version": "1.0.0",
+  "description": "Alguns algoritmos para prática de análise assintótica",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "mocha lib/**/**.spec.js"
+  },
+  "author": "Eduardo Vieira <eduardofelipevieira@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.0.2"
+  }
+}
