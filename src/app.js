@@ -1,29 +1,73 @@
 let app = {
     // PROBLEMS
-    peakFindingLinear: function (set) {
-        if (set.length === 1) {
-            return set[0];
-        }
+    peakFinding: function (set) {
+        return findPeak(set, 0, set.length - 1)
 
-        for (let i = 0; i < set.length; i++) {
-            if (set[i] > set[i - 1] && set[i] > set[i + 1]) {
-                return set[i];
+        function findPeak(set, start, end) {
+            let index = parseInt((start + end) / 2)
+
+            if (index - 1 >= 0 && set[index] < set[index - 1]) {
+                return findPeak(set, start, index - 1)
+            } else if (index + 1 <= set.length - 1 && set[index] < set[index + 1]) {
+                return findPeak(set, index + 1, end)
+            } else {
+                return set[index]
             }
         }
     },
-    peakFindingLogarithm: function (set) {
-        return findPeak(set, 0, set.length - 1);
+    countNegative: function (input) {
+        // let count = 0
 
-        function findPeak(set, start, end) {
-            let index = parseInt((start + end) / 2);
+        // for(let i = 0; i < input.length; i++) {
+        //     for(let j = input[i].length - 1; j >= 0; j--) {
+        //         if(input[i][j] < 0) {
+        //             count += j + 1
 
-            if (index - 1 >= 0 && set[index] < set[index - 1]) {
-                return findPeak(set, start, index - 1);
-            } else if (index + 1 <= set.length - 1 && set[index] < set[index + 1]) {
-                return findPeak(set, index + 1, end);
+        //             break
+        //         }
+        //     }
+        // }
+
+        let count = 0, i = 0, j = input[i].length - 1
+
+        while (i < input.length && j >= 0) {
+            if (input[i][j] < 0) {
+                count += j + 1
+                i++
             } else {
-                return set[index];
+                j--
             }
+        }
+
+        return count
+    },
+    problem3NPlus1: function (i, j) {
+        let max = 0
+
+        for(; i <= j; i++) {
+            let currentCycle = cycleLength(i)
+
+            if(currentCycle > max) {
+                max = currentCycle
+            }
+        }
+
+        return max;
+
+        function cycleLength(n) {
+            let count = 1
+
+            while (n !== 1) {
+                if (n % 2 === 0) {
+                    n /= 2;
+                } else {
+                    n = n * 3 + 1;
+                }
+
+                count++
+            }
+
+            return count
         }
     },
 
@@ -32,212 +76,212 @@ let app = {
         for (let i = 1; i < arr.length; i++) {
             for (let j = i - 1; j >= 0; j--) {
                 if (arr[j + 1] < arr[j]) {
-                    let aux = arr[j + 1];
-                    arr[j + 1] = arr[j];
-                    arr[j] = aux;
+                    let aux = arr[j + 1]
+                    arr[j + 1] = arr[j]
+                    arr[j] = aux
                 } else {
-                    break;
+                    break
                 }
             }
         }
 
-        return arr;
+        return arr
     },
     mergeSort: function (arr) {
-        if (!arr) { return []; }
-        if (arr && arr.length === 0) { return []; }
+        if (!arr) { return [] }
+        if (arr && arr.length === 0) { return [] }
 
-        let low = 0, high = arr.length - 1;
-        let middle = parseInt((low + high) / 2);
+        let low = 0, high = arr.length - 1
+        let middle = parseInt((low + high) / 2)
 
-        sort(arr, low, middle);
-        sort(arr, middle + 1, high);
-        merge(arr, low, middle, high);
+        sort(arr, low, middle)
+        sort(arr, middle + 1, high)
+        merge(arr, low, middle, high)
 
-        return arr;
+        return arr
 
         function sort(arr, low, high) {
             if (low < high && high < arr.length && arr.length != 0) {
-                let middle = parseInt((low + high) / 2);
+                let middle = parseInt((low + high) / 2)
 
-                sort(arr, low, middle);
-                sort(arr, middle + 1, high);
-                merge(arr, low, middle, high);
+                sort(arr, low, middle)
+                sort(arr, middle + 1, high)
+                merge(arr, low, middle, high)
             }
         }
 
         function merge(arr, low, middle, high) {
-            let aux = new Array(arr.length);
+            let aux = new Array(arr.length)
 
             for (let i = low; i <= high; i++) {
-                aux[i] = arr[i];
+                aux[i] = arr[i]
             }
 
-            let i = low, j = middle + 1, k = low;
+            let i = low, j = middle + 1, k = low
 
             while (i <= middle && j <= high) {
                 if (aux[i] <= aux[j]) {
-                    arr[k] = aux[i];
-                    i++;
+                    arr[k] = aux[i]
+                    i++
                 } else {
-                    arr[k] = aux[j];
-                    j++;
+                    arr[k] = aux[j]
+                    j++
                 }
-                k++;
+                k++
             }
 
             while (i <= middle) {
-                arr[k] = aux[i];
-                i++;
-                k++;
+                arr[k] = aux[i]
+                i++
+                k++
             }
         }
     },
     selectionSort: function (arr) {
-        let min;
+        let min
 
         for (let i = 0; i < arr.length - 1; i++) {
-            min = i;
+            min = i
 
             for (let j = i + 1; j < arr.length; j++) {
                 if (arr[j] < arr[min]) {
-                    min = j;
+                    min = j
                 }
             }
 
             if (arr[i] != arr[min]) {
-                aux = arr[i];
-                arr[i] = arr[min];
-                arr[min] = aux;
+                aux = arr[i]
+                arr[i] = arr[min]
+                arr[min] = aux
             }
         }
 
-        return arr;
+        return arr
     },
     bucketSort: function (arr, n) {
-        let buckets = new Array(n);
+        let buckets = new Array(n)
 
         for (let i = 0; i < n; i++) {
-            let bi = parseInt(n * arr[i]);
-            
+            let bi = parseInt(n * arr[i])
+
             if (bi) {
                 if (!buckets[bi]) {
-                    buckets[bi] = new Array();
+                    buckets[bi] = new Array()
                 }
 
-                buckets[bi].push(arr[i]);
+                buckets[bi].push(arr[i])
             }
         }
 
         for (let i = 0; i < n; i++) {
             if (!buckets[i]) {
-                buckets[i] = new Array();
+                buckets[i] = new Array()
             }
 
-            if(buckets[i].length > 1) {
-                app.mergeSort(buckets[i]);
+            if (buckets[i].length > 1) {
+                app.mergeSort(buckets[i])
             }
         }
 
-        let index = 0;
+        let index = 0
         for (let i = 0; i < n; i++) {
             for (let j = 0; j < buckets[i].length; j++) {
-                arr[index++] = buckets[i][j];
+                arr[index++] = buckets[i][j]
             }
         }
 
-        return arr;
+        return arr
     },
 
     // SEARCHES
     binarySearch: function (key, arr) {
-        return search(key, arr, 0, arr.length);
+        return search(key, arr, 0, arr.length)
 
         function search(key, arr, low, high) {
-            let middle = parseInt((low + high) / 2);
+            let middle = parseInt((low + high) / 2)
 
             if (arr[middle] === key) {
-                return middle;
+                return middle
             }
 
             if (low > high) {
-                return -1;
+                return -1
             }
 
             if (arr[middle] > key) {
-                return search(key, arr, 0, middle - 1);
+                return search(key, arr, 0, middle - 1)
             }
 
             if (arr[middle] < key) {
-                return search(key, arr, middle, high - 1);
+                return search(key, arr, middle, high - 1)
             }
 
-            return -1;
+            return -1
         }
     },
     linearSearch: function (key, arr) {
-        let result = -1;
+        let result = -1
 
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] === key) {
-                result = i;
+                result = i
 
-                break;
+                break
             }
         }
 
-        return result;
+        return result
     },
 
     // STRUCTURES
     LinkedList: function () {
         function Node(data) {
-            this.data = data;
-            this.next = null;
+            this.data = data
+            this.next = null
         }
 
-        this.length = 0;
-        this.head = null;
+        this.length = 0
+        this.head = null
 
         this.add = function (value) {
             let node = new Node(value),
-                currentNode = this.head;
+                currentNode = this.head
 
             if (!currentNode) {
-                this.head = node;
-                this.length++;
+                this.head = node
+                this.length++
 
-                return node;
+                return node
             }
 
             while (currentNode.next) {
-                currentNode = currentNode.next;
+                currentNode = currentNode.next
             }
 
-            currentNode.next = node;
+            currentNode.next = node
 
-            this.length++;
+            this.length++
 
-            return node;
-        };
+            return node
+        }
 
         this.get = function (position) {
             let currentNode = this.head,
                 length = this.length,
                 count = 1,
-                message = { failure: 'Failure: non-existent node in this list.' };
+                message = { failure: 'Failure: non-existent node in this list.' }
 
             if (length === 0 || position < 1 || position > length) {
-                throw new Error(message.failure);
+                throw new Error(message.failure)
             }
 
             while (count < position) {
-                currentNode = currentNode.next;
-                count++;
+                currentNode = currentNode.next
+                count++
             }
 
-            return currentNode;
-        };
+            return currentNode
+        }
 
         this.remove = function (position) {
             let currentNode = this.head,
@@ -246,35 +290,35 @@ let app = {
                 message = { failure: 'Failure: non-existent node in this list.' },
                 beforeNodeToDelete = null,
                 nodeToDelete = null,
-                deletedNode = null;
+                deletedNode = null
 
             if (position < 0 || position > length) {
-                throw new Error(message.failure);
+                throw new Error(message.failure)
             }
 
             if (position === 1) {
-                this.head = currentNode.next;
-                deletedNode = currentNode;
-                currentNode = null;
-                this.length--;
+                this.head = currentNode.next
+                deletedNode = currentNode
+                currentNode = null
+                this.length--
 
-                return deletedNode;
+                return deletedNode
             }
 
             while (count < position) {
-                beforeNodeToDelete = currentNode;
-                nodeToDelete = currentNode.next;
-                count++;
+                beforeNodeToDelete = currentNode
+                nodeToDelete = currentNode.next
+                count++
             }
 
-            beforeNodeToDelete.next = nodeToDelete.next;
-            deletedNode = nodeToDelete;
-            nodeToDelete = null;
-            this.length--;
+            beforeNodeToDelete.next = nodeToDelete.next
+            deletedNode = nodeToDelete
+            nodeToDelete = null
+            this.length--
 
-            return deletedNode;
-        };
+            return deletedNode
+        }
     }
 }
 
-module.exports = app;
+module.exports = app
