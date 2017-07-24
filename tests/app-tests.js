@@ -10,31 +10,53 @@ describe('Problems', function () {
             200, 898, 23, 599, 327
         ]
 
-        expect(app.peakFinding(set)).to.match(/^(1000|661|836|236|869|845|898|599)$/)
+        expect(app.problems.peakFinding(set)).to.match(/^(1000|661|836|236|869|845|898|599)$/)
     })
 
     it('Count Negative O(n+m)', function () {
         let matrix = [
             [-3, -2, -1, 1],
-            [-2,  2,  3, 4],
-            [ 4,  5,  7, 8]
+            [-2, 2, 3, 4],
+            [4, 5, 7, 8]
         ]
 
-        expect(app.countNegative(matrix)).to.equal(4)
+        expect(app.problems.countNegative(matrix)).to.equal(4)
     })
 
     it('3n + 1 Problem O(n*m)', function () {
         let i = 1, j = 10, result = 20
-        expect(app.problem3NPlus1(i, j)).to.equal(result)
+        expect(app.problems.problem3NPlus1(i, j)).to.equal(result)
 
         i = 100, j = 200, result = 125
-        expect(app.problem3NPlus1(i, j)).to.equal(result)
+        expect(app.problems.problem3NPlus1(i, j)).to.equal(result)
 
         i = 201, j = 210, result = 89
-        expect(app.problem3NPlus1(i, j)).to.equal(result)
+        expect(app.problems.problem3NPlus1(i, j)).to.equal(result)
 
         i = 900, j = 1000, result = 174
-        expect(app.problem3NPlus1(i, j)).to.equal(result)
+        expect(app.problems.problem3NPlus1(i, j)).to.equal(result)
+    })
+
+    it('Minesweeper O(?)', function() {
+        const input = 
+        `4 4
+        *...
+        ....
+        .*..
+        ....
+        3 5
+        **...
+        .....
+        .*...
+        0 0`
+
+        const result = 
+        `*100
+        2210
+        1*10
+        1110`
+
+        expect(app.problems.minesweeper(input)).to.equal(result)
     })
 })
 
@@ -46,7 +68,7 @@ describe('Sort', function () {
             845, 530, 200, 898, 23, 599, 327
         ]
 
-        expect(app.insertionSort(set)).to.deep.equal([23, 41, 42, 44, 65, 66, 143, 200, 236, 327,
+        expect(app.sorts.insertionSort(set)).to.deep.equal([23, 41, 42, 44, 65, 66, 143, 200, 236, 327,
             430, 461, 473, 530, 542, 599, 639, 659, 661, 663,
             747, 805, 836, 845, 869, 898, 1000])
     })
@@ -58,7 +80,7 @@ describe('Sort', function () {
             845, 530, 200, 898, 23, 599, 327
         ]
 
-        expect(app.mergeSort(set)).to.deep.equal([23, 41, 42, 44, 65, 66, 143, 200, 236, 327,
+        expect(app.sorts.mergeSort(set)).to.deep.equal([23, 41, 42, 44, 65, 66, 143, 200, 236, 327,
             430, 461, 473, 530, 542, 599, 639, 659, 661, 663,
             747, 805, 836, 845, 869, 898, 1000])
     })
@@ -70,7 +92,7 @@ describe('Sort', function () {
             845, 530, 200, 898, 23, 599, 327
         ]
 
-        expect(app.selectionSort(set)).to.deep.equal([23, 41, 42, 44, 65, 66, 143, 200, 236, 327,
+        expect(app.sorts.selectionSort(set)).to.deep.equal([23, 41, 42, 44, 65, 66, 143, 200, 236, 327,
             430, 461, 473, 530, 542, 599, 639, 659, 661, 663,
             747, 805, 836, 845, 869, 898, 1000])
     })
@@ -80,29 +102,25 @@ describe('Sort', function () {
             0.897, 0.565, 0.656, 0.1234, 0.665, 0.3434
         ]
 
-        expect(app.bucketSort(set, 10)).to.deep.equal([0.1234, 0.3434, 0.565, 0.656, 0.665, 0.897])
+        expect(app.sorts.bucketSort(set, 10)).to.deep.equal([0.1234, 0.3434, 0.565, 0.656, 0.665, 0.897])
     })
 })
 
 describe('Search', function () {
-    it('Binary Search O(lg n) Contains element', function () {
+    it('Binary Search O(lg n)', function () {
         let list = [23, 41, 42, 44, 65, 66, 143, 200, 236, 327,
             430, 461, 473, 530, 542, 599, 639, 659, 661, 663,
             747, 805, 836, 845, 869, 898, 1000]
 
-        expect(app.binarySearch(845, list)).to.equal(23)
-    })
+        expect(app.searches.binarySearch(845, list)).to.equal(23)
 
-    it('Binary Search O(lg n) Not contains element', function () {
-        let list = [23, 41, 42, 44, 65, 66, 143, 200, 236, 327,
+        list = [23, 41, 42, 44, 65, 66, 143, 200, 236, 327,
             430, 461, 473, 530, 542, 599, 639, 659, 661, 663,
             747, 805, 836, 845, 869, 898, 1000]
 
-        expect(app.binarySearch(1001, list)).to.equal(-1)
-    })
+        expect(app.searches.binarySearch(1001, list)).to.equal(-1)
 
-    it('Binary Search O(lg n) First element', function () {
-        let list = app.insertionSort([461, 44, 639, 659, 1000, 542, 661, 430, 836,
+        list = app.sorts.insertionSort([461, 44, 639, 659, 1000, 542, 661, 430, 836,
             66, 236, 41, 42, 473, 663, 747, 869, 805, 845, 530, 200, 898, 23,
             599, 327, 12, 234, 748, 778, 389, 207, 192, 515, 400, 509, 640, 39,
             469, 731, 287, 814, 444, 608, 271, 769, 688, 329, 916, 505, 905,
@@ -111,10 +129,10 @@ describe('Search', function () {
             259, 33, 833, 812, 189, 54, 480, 97, 682, 924, 301, 235, 90, 195, 676,
             429, 295, 630, 757, 403, 375, 106])
 
-        expect(app.binarySearch(8, list)).to.equal(0)
+        expect(app.searches.binarySearch(8, list)).to.equal(0)
     })
 
-    it('Linear Search O(n) Contains element', function () {
+    it('Linear Search O(n)', function () {
         let list = [461, 44, 639, 659, 1000, 542, 661, 430, 836,
             66, 236, 41, 42, 473, 663, 747, 869, 805, 845, 530, 200, 898, 23,
             599, 327, 12, 234, 748, 778, 389, 207, 192, 515, 400, 509, 640, 39,
@@ -124,11 +142,9 @@ describe('Search', function () {
             259, 33, 833, 812, 189, 54, 480, 97, 682, 924, 301, 235, 90, 195, 676,
             429, 295, 630, 757, 403, 375, 106]
 
-        expect(app.linearSearch(845, list)).to.equal(18)
-    })
+        expect(app.searches.linearSearch(845, list)).to.equal(18)
 
-    it('Linear Search O(n) Not contains element', function () {
-        let list = [461, 44, 639, 659, 1000, 542, 661, 430, 836,
+        list = [461, 44, 639, 659, 1000, 542, 661, 430, 836,
             66, 236, 41, 42, 473, 663, 747, 869, 805, 845, 530, 200, 898, 23,
             599, 327, 12, 234, 748, 778, 389, 207, 192, 515, 400, 509, 640, 39,
             469, 731, 287, 814, 444, 608, 271, 769, 688, 329, 916, 505, 905,
@@ -137,11 +153,9 @@ describe('Search', function () {
             259, 33, 833, 812, 189, 54, 480, 97, 682, 924, 301, 235, 90, 195, 676,
             429, 295, 630, 757, 403, 375, 106]
 
-        expect(app.linearSearch(1001, list)).to.equal(-1)
-    })
+        expect(app.searches.linearSearch(1001, list)).to.equal(-1)
 
-    it('Linear Search O(n) First element', function () {
-        let list = [461, 44, 639, 659, 1000, 542, 661, 430, 836,
+        list = [461, 44, 639, 659, 1000, 542, 661, 430, 836,
             66, 236, 41, 42, 473, 663, 747, 869, 805, 845, 530, 200, 898, 23,
             599, 327, 12, 234, 748, 778, 389, 207, 192, 515, 400, 509, 640, 39,
             469, 731, 287, 814, 444, 608, 271, 769, 688, 329, 916, 505, 905,
@@ -150,6 +164,6 @@ describe('Search', function () {
             259, 33, 833, 812, 189, 54, 480, 97, 682, 924, 301, 235, 90, 195, 676,
             429, 295, 630, 757, 403, 375, 106]
 
-        expect(app.linearSearch(461, list)).to.equal(0)
+        expect(app.searches.linearSearch(461, list)).to.equal(0)
     })
 })
