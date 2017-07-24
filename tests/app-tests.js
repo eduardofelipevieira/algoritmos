@@ -38,23 +38,24 @@ describe('Problems', function () {
     })
 
     it('Minesweeper O(?)', function() {
-        const input = 
-        `4 4
-        *...
-        ....
-        .*..
-        ....
-        3 5
-        **...
-        .....
-        .*...
-        0 0`
+        let input = `4 4
+*...
+....
+.*..
+....
+3 5
+**...
+.....
+.*...
+0 0`
 
-        const result = 
-        `*100
-        2210
-        1*10
-        1110`
+        let result = `*100
+2210
+1*10
+1110
+**100
+33200
+1*100`
 
         expect(app.problems.minesweeper(input)).to.equal(result)
     })
