@@ -113,8 +113,6 @@ let problems = {
                         let count = countMinesAround(board, row, column)
 
                         resultField = count.toString()
-                    } else if (Number.isInteger(field)) {
-                        resultField = field
                     }
 
                     output += resultField
