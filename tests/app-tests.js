@@ -38,6 +38,7 @@ describe('Problems', function () {
     })
 
     it('Minesweeper O(?)', function() {
+        // Maybe O(n*m*8) =/
         let input = `4 4
 *...
 ....
