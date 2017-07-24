@@ -142,23 +142,23 @@ let problems = {
             // r4, c3
             // r4, c4
 
-            let currentRow = board[row - 1]
+            let previousRow = board[row - 1]
 
-            if (currentRow) {
-                if (currentRow[column - 1] === '*') {
+            if (previousRow) {
+                if (previousRow[column - 1] === '*') {
                     count++
                 }
 
-                if (currentRow[column] === '*') {
+                if (previousRow[column] === '*') {
                     count++
                 }
 
-                if (currentRow[column + 1] === '*') {
+                if (previousRow[column + 1] === '*') {
                     count++
                 }
             }
 
-            currentRow = board[row]
+            let currentRow = board[row]
 
             if (currentRow[column - 1] === '*') {
                 count++
@@ -168,18 +168,18 @@ let problems = {
                 count++
             }
 
-            currentRow = board[row + 1]
+            let nextRow = board[row + 1]
 
-            if (currentRow) {
-                if (currentRow[column - 1] === '*') {
+            if (nextRow) {
+                if (nextRow[column - 1] === '*') {
                     count++
                 }
 
-                if (currentRow[column] === '*') {
+                if (nextRow[column] === '*') {
                     count++
                 }
 
-                if (currentRow[column + 1] === '*') {
+                if (nextRow[column + 1] === '*') {
                     count++
                 }
             }
