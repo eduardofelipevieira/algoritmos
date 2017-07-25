@@ -37,8 +37,7 @@ describe('Problems', function () {
         expect(app.problems.problem3NPlus1(i, j)).to.equal(result)
     })
 
-    it('Minesweeper O(?)', function() {
-        // Maybe O(n*m*8) =/
+    it('Minesweeper O(n*m*8)', function() {
         let input = `4 4
 *...
 ....
@@ -59,6 +58,12 @@ describe('Problems', function () {
 1*100`
 
         expect(app.problems.minesweeper(input)).to.equal(result)
+    })
+
+    it('Odd Occurrences in Array O(n)', function () {
+        let arr = [9, 3, 9, 3, 9, 7, 9]
+
+        expect(app.problems.oddOccurrencesInArray(arr)).to.equal(7)
     })
 })
 
